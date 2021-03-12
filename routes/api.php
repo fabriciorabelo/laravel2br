@@ -23,8 +23,8 @@ Route::middleware('auth:api')->get('/profile', function (Request $request) {
     return $request->user();
 });
 
-Route::post('register', [AuthController::class, 'register'])->name('register');
-Route::post('login', [AuthController::class, 'login'])->name('login');
+Route::post('auth/register', [AuthController::class, 'register'])->name('register');
+Route::post('auth/login', [AuthController::class, 'login'])->name('login');
 
 Route::apiResource('users', UserController::class)->middleware('auth:api');
 Route::apiResource('products', ProductController::class)->middleware('auth:api');
