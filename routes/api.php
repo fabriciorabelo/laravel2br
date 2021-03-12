@@ -4,6 +4,7 @@ use App\Http\Controllers\API\AuthController;
 use App\Http\Controllers\API\OrderController;
 use App\Http\Controllers\API\ProductController;
 use App\Http\Controllers\API\ProductStockController;
+use App\Http\Controllers\API\UserController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -18,13 +19,14 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:api')->get('/user', function (Request $request) {
+Route::middleware('auth:api')->get('/profile', function (Request $request) {
     return $request->user();
 });
 
 Route::post('register', [AuthController::class, 'register'])->name('register');
 Route::post('login', [AuthController::class, 'login'])->name('login');
 
+Route::apiResource('users', UserController::class)->middleware('auth:api');
 Route::apiResource('products', ProductController::class)->middleware('auth:api');
 Route::apiResource('product-stocks', ProductStockController::class)->middleware('auth:api');
 Route::apiResource('orders', OrderController::class)->middleware('auth:api');

@@ -22,7 +22,8 @@ class OrderResource extends JsonResource
             'totalAmount' => (double) $this->orderProducts()->sum('amount'),
             'totalAmountWihtoutDiscount' =>  (double) number_format($this->orderProducts()->sum(DB::raw('(price * amount)')), 2, '.', ''),
             'totalAmountWithDiscount' =>  (double) number_format($this->orderProducts()->sum(DB::raw('(discount_price * amount)')), 2, '.', ''),
-            'items' => OrderProductResource::collection($this->orderProducts)
+            'items' => OrderProductResource::collection($this->orderProducts),
+            'user' => new UserResource($this->user),
         ];
     }
 }
